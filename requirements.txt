@@ -1,0 +1,4 @@
+numpy==1.15.0
+opencv-python==3.4.2.17
+PyQt5==5.11.2
+PyQt5-sip==4.19.12
