@@ -4,6 +4,8 @@ Video data processing pipeline using OpenCV
 A video processing toolset that allows the user to interactively modify the data in the video stream to
 see the immediate effect.
 
+![VidPipe GUI](./images/VidPipe.png)
+
 The processing flow is a pipeline that uses filters to transform the data in discrete steps along the dataflow path.
 
 A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See SampleFilter.py for a simple example.)  
@@ -35,5 +37,6 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE0OTI0NzIwLDE0NjkxMzk5NzJdfQ==
+eyJoaXN0b3J5IjpbLTE1NjM2NjY3MDYsMTE0OTI0NzIwLDE0Nj
+kxMzk5NzJdfQ==
 -->
