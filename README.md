@@ -8,7 +8,7 @@ see the immediate effect.
 
 The processing flow is a pipeline that uses filters to transform the data in discrete steps along the dataflow path.
 
-A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See SampleFilter.py for a simple example.)  
+A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See [SampleFilter.py](https://github.com/jchrisweaver/vidpipe/blob/master/vidpipe/SampleFilter.py) for a simple example.)  
 
 Filters are arranged and called in a specific order to create a data flow.  The order of the filters matches the order in which they appear in the right-hand side of the dialog box in the scroll window.  Each filter can enabled, disabled or drag-drop rearranged to change the processing order.  Each filters effects can be immediately visible in the processed video feed and compared to the preview video feed.
 
@@ -40,6 +40,6 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODYwODQxNDgyLDExNDkyNDcyMCwxNDY5MT
-M5OTcyXX0=
+eyJoaXN0b3J5IjpbODAwMTU1NDEsMTE0OTI0NzIwLDE0NjkxMz
+k5NzJdfQ==
 -->
