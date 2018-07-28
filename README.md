@@ -30,6 +30,7 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 The GUI is designed with QT for simplicity, which must be installed manually (https://www.qt.io/download)
 
 **Why I Wrote This**
+
 I took the [PyImageSearch Gurus](https://www.pyimagesearch.com/pyimagesearch-gurus/) course to learn more about computer vision.  Many of
 the steps to process an image required several discrete steps applies to an image to get a result.
 
@@ -39,6 +40,6 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTk0ODczMTY3NiwxMTQ5MjQ3MjAsMTQ2OT
-EzOTk3Ml19
+eyJoaXN0b3J5IjpbODYwODQxNDgyLDExNDkyNDcyMCwxNDY5MT
+M5OTcyXX0=
 -->
