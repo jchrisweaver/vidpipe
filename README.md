@@ -14,7 +14,7 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 
 **The filters that are currently implemented are:**
 
-* Blur filter - uses OpenCV GaussianBlur function
+* Blur filter - uses OpenCV [GaussianBlur](https://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=gaussianblur#gaussianblur) function
 * Simple motion detector
 * Edge detector - uses OpenCV Canny and findCountours functions
 * Activity detector
@@ -35,5 +35,5 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTI1MzA2NDczMV19
+eyJoaXN0b3J5IjpbODMyNDc4NzQwXX0=
 -->
