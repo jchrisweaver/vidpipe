@@ -21,7 +21,7 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 * Flesh detector - uses OpenCV inRange function
 
 **New filters can be added with the following steps:**
-** TODO: Add steps here!
+*TODO: Add steps here!*
 
 The GUI is designed with QT for simplicity, which must be installed manually (https://www.qt.io/download)
 
@@ -35,5 +35,5 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQ2OTEzOTk3Ml19
+eyJoaXN0b3J5IjpbMTE0OTI0NzIwLDE0NjkxMzk5NzJdfQ==
 -->
