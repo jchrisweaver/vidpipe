@@ -6,7 +6,7 @@ see the immediate effect.
 
 The processing flow is a pipeline that uses filters to transform the data in discrete steps along the dataflow path.
 
-A filter is one file, implemented in Python, that has functions
+A filter is one file, implemented in Python, that has functions that are called from the main app that are passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.
 
 pipeline concept is based filters (See SampleFilter.py for a simple example.)  A filter takes 
 an action on the video frame and then passes the video frame forward.  Filters are lined up to create a
@@ -40,5 +40,5 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1Nzg5NzI2NjldfQ==
+eyJoaXN0b3J5IjpbMjEyMTE4OTg0M119
 -->
