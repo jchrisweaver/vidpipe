@@ -8,7 +8,7 @@ see the immediate effect.
 
 The processing flow is a pipeline that uses filters to transform the data in discrete steps along the dataflow path.
 
-A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See [SampleFilter.py](https://github.com/jchrisweaver/vidpipe/blob/master/vidpipe/SampleFilter.py) for a simple example.)  
+A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See [SampleFilter.py](https://github.com/jchrisweaver/vidpipe/blob/master/vidpipe/SampleFilter.py) for a simple example.)
 
 Filters are arranged and called in a specific order to create a data flow.  The order of the filters matches the order in which they appear in the right-hand side of the dialog box in the scroll window.  Each filter can enabled, disabled or drag-drop rearranged to change the processing order.  Each filters effects can be immediately visible in the processed video feed and compared to the preview video feed.
 
@@ -34,13 +34,13 @@ The GUI is designed with QT for simplicity, which must be installed manually (ht
 **Why I Wrote This**
 
 I took the [PyImageSearch Gurus](https://www.pyimagesearch.com/pyimagesearch-gurus/) course to learn more about computer vision.  Many of
-the steps to process an image required several discrete steps applies to an image to get a result.
+the steps required to process an image have several discrete stages of manipulation or analyis of the image data to arrive at a result.
 
-I wanted to better understand how each discrete step affected the image data and how rearranging the 
-order of each step affected the data.  This tool made it extremelty easy to visualize each step.  I've
-continued to add additional fun filters like the activity filter just for fun.
+I wanted to better understand how each discrete step affected the image data and how rearranging the order of each step affected the data.  This tool made it extremelty easy to visualize each step.  I've continued to add additional fun filters as time and interest permit.
 
-If you use this tool, please let me know @jchrisweaver on twitter.
+If you use and enjoy this tool, please let me know @jchrisweaver on twitter.
+
+And by all means, please submit PRs if you'd like to add features, fix bugs, etc.
 <!--stackedit_data:
 eyJoaXN0b3J5IjpbLTIwNzk2Njg5NTYsODAwMTU1NDEsMTE0OT
 I0NzIwLDE0NjkxMzk5NzJdfQ==
