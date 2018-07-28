@@ -16,14 +16,14 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 
 * Blur filter - uses OpenCV [GaussianBlur](https://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=gaussianblur#gaussianblur) function
 * Simple motion detector
-* Edge detector - uses OpenCV Canny and findCountours functions
+* Edge detector - uses OpenCV [Canny](https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=canny#canny) and [findCountours](https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontoures#findcontours) functions
 * Activity detector
 * Flesh detector - uses OpenCV inRange function
 
 **New filters can be added with the following steps:**
 ** TODO: Add steps here!
 
-The GUI is desgned with QT for simplicity, which must be installed manually (https://www.qt.io/download)
+The GUI is designed with QT for simplicity, which must be installed manually (https://www.qt.io/download)
 
 **Why I Wrote This**
 I took the PyImageSearch Gurus course that teachs computer vision with a strong focus on OpenCV.  Many of
@@ -35,5 +35,5 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODMyNDc4NzQwXX0=
+eyJoaXN0b3J5IjpbLTExNTYwNDMxMTVdfQ==
 -->
