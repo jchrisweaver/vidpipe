@@ -26,8 +26,8 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 The GUI is designed with QT for simplicity, which must be installed manually (https://www.qt.io/download)
 
 **Why I Wrote This**
-I took the PyImageSearch Gurus course that teachs computer vision with a strong focus on OpenCV.  Many of
-the steps to "process" an image required several descrete steps applies to an image to get a result.
+I took the [PyImageSearch Gurus](https://www.pyimagesearch.com/pyimagesearch-gurus/) course to learn more about computer vision.  Many of
+the steps to process an image required several discrete steps applies to an image to get a result.
 
 I wanted to better understand how each discrete step affected the image data and how rearranging the 
 order of each step affected the data.  This tool made it extremelty easy to visualize each step.  I've
@@ -35,5 +35,5 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTExNTYwNDMxMTVdfQ==
+eyJoaXN0b3J5IjpbLTE2Mjg4NDIwODJdfQ==
 -->
