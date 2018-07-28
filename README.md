@@ -14,6 +14,8 @@ Filters are arranged and called in a specific order to create a data flow.  The 
 
 Each filter takes a single action.  For example, the Blur Filter takes an incoming video frame, applies a blur action to the frame data and then passes the new frame data to the next filter in the path.
 
+![GUI Guide](./images/VidPipe-Guide.png)
+
 **The filters that are currently implemented are:**
 
 * Blur filter - uses OpenCV [GaussianBlur](https://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=gaussianblur#gaussianblur) function
@@ -37,6 +39,6 @@ continued to add additional fun filters like the activity filter just for fun.
 
 If you use this tool, please let me know @jchrisweaver on twitter.
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE1NjM2NjY3MDYsMTE0OTI0NzIwLDE0Nj
-kxMzk5NzJdfQ==
+eyJoaXN0b3J5IjpbMTk0ODczMTY3NiwxMTQ5MjQ3MjAsMTQ2OT
+EzOTk3Ml19
 -->
