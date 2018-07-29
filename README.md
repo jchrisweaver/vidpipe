@@ -24,7 +24,6 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 * Simple motion detector
 * Edge detector - uses OpenCV [Canny](https://docs.opencv.org/2.4/modules/imgproc/doc/feature_detection.html?highlight=canny#canny) and [findCountours](https://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontoures#findcontours) functions
 * Activity detector
-* Flesh detector - uses OpenCV inRange function
 
 **New filters can be added with the following steps:**
 *TODO: Add steps here!*

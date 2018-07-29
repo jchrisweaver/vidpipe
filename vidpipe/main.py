@@ -22,7 +22,6 @@ from CameraWidget import CameraWidget
 
 from FrameProcessor import FrameProcessor
 from EdgeDetector import EdgeDetector
-from FleshDetector import FleshDetector
 from BlurFilter import BlurFilter
 from BlockNumber import BlockNumber
 from Histogram import HistogramFilter
@@ -64,7 +63,6 @@ class KnobTurner( QObject, Ui_Dialog ):
 
         self._filters = [
             BlurFilter(),
-            FleshDetector(),
             SimpleMotionDetection(),
             ActivityFilter(),
             HistogramFilter(),
@@ -271,18 +269,19 @@ class KnobTurner( QObject, Ui_Dialog ):
         bin_count = self.hist.shape[ 0 ]
         bin_w = 40
         img = np.zeros( ( 256, bin_count * bin_w, 3 ), np.uint8 )
-        #for i in xrange( bin_count ):
         for i in range( 0, bin_count ):
             h = int( self.hist[ i ] )
-            cv2.rectangle( img, ( i * bin_w + 2, 255 ), ( ( i + 1 ) * bin_w - 2, 255 - h ),
-                          ( int( 180.0 * i / bin_count ), 255, 255 ), -1 )
+            cv2.rectangle( img, ( i * bin_w + 2, 255 ),                     # top left corner
+                                ( ( i + 1 ) * bin_w - 2, 255 - h ),         # bottom right corner
+                                ( int( 180.0 * i / bin_count ), 255, 255 ), # color
+                                -1 )                                        # -1 is fill shape
         img = cv2.cvtColor( img, cv2.COLOR_HSV2BGR )
         cv2.imshow( self._histogramWindowName, img )
 
     def showWindows( self ):
         self.videoLive.show()
         self.videoFiltered.show()
-        print( self.videoLive.sizeHint() )
+        print( "Live video size: {}", self.videoLive.sizeHint() )
 
     @pyqtSlot( np.ndarray )
     def processPreviewFrame(self, frame ):
