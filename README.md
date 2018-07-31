@@ -6,6 +6,12 @@ see the immediate effect.
 
 ![VidPipe GUI](./images/VidPipe.png)
 
+**To run**
+
+python main.py
+
+**Overview**
+
 The processing flow is a pipeline that uses filters to transform the data in discrete steps along the dataflow path.
 
 A *filter* is an object made from a simple python file that that has processing functions called from the main app.  The main processing function is passed a single video frame data buffer.  That data can be examined and/or modified.  The new data can then be passed back to the main app.  (See [SampleFilter.py](https://github.com/jchrisweaver/vidpipe/blob/master/vidpipe/SampleFilter.py) for a simple example.)
