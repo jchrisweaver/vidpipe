@@ -7,6 +7,13 @@ import numpy as np
 from FrameProcessor import FrameProcessor
 from helpers import draw_rect, combine
 
+'''
+Filter to detect motion.  The 'simple' means it's a very simple imlplemenation:
+Just rack the difference between this frame and the previous frame and if it's
+above a threashold, mark it as 'activity'
+
+'''
+
 class SimpleMotionDetection( FrameProcessor ):
 
     _color = ( 200, 80, 80 )
@@ -98,6 +105,7 @@ class SimpleMotionDetection( FrameProcessor ):
                 else:
                     self._activeRects.append( ( x * xjump, y * yjump, xjump, yjump ) )
 
+                # debug trace window that show a histogram
                 if self._watchFrame_enabled and self._watchFrame == ( y, x ):
                     self._graph_ringbuf = np.roll( self._graph_ringbuf, 1 )
                     graphValue = yjump * dev_from_hist / self._scale

@@ -7,6 +7,13 @@ import numpy as np
 
 from FrameProcessor import FrameProcessor
 
+'''
+Still in progress....
+
+Filter to remove the background and only keep the parts of the video that are
+actively changing.
+'''
+
 class BackgroundRemove( FrameProcessor ):
 
     def __init__ ( self ):

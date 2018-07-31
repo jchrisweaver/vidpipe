@@ -8,8 +8,16 @@ import numpy as np
 from FrameProcessor import FrameProcessor
 from helpers import draw_rect, draw_str
 
+'''
+Activity Filter tries to detect periodic activity in each block and then remove that
+window of video so it's not passed forward.
+
+Use case:  Ignoring a fan in the background when processing video.
+'''
+
 class ActivityFilter( FrameProcessor ):
 
+    # color of the filter and outlines
     _color = ( 200, 180, 255 )
 
     # 10 x 10 grid
@@ -44,7 +52,11 @@ class ActivityFilter( FrameProcessor ):
         random.seed( 1231 )
 
         self._enabled = False
-        self._watchFrame = ( 0, 8 ) # NOTE: Order is Y, X
+
+        # frame that's processed but is hijacked to show a histogram instead of video
+        # useful for debugging values and buffers
+        self._watchFrame_enabled = False
+        self._watchFrame = ( 0, 8 ) # Set the watch frame at cel x=8, y=0   NOTE: Order is Y, X
 
         self._graph_ringbuf_MovingAverage = np.zeros( 100, np.float32 )
         self._graph_ringbuf = np.zeros( 100, np.uint8 )
@@ -144,7 +156,7 @@ class ActivityFilter( FrameProcessor ):
                 # 2nd derivative - change of change over time
                 self._devAccum[ y ][ x ] += dev_from_hist
 
-                if self._watchFrame ==  ( y, x ):
+                if self._watchFrame_enabled and self._watchFrame ==  ( y, x ):
 
                     self._graph_ringbuf = np.roll( self._graph_ringbuf, 1 )
                     self._graph_ringbuf[ 0 ] = yjump * dev_from_hist / 100000
