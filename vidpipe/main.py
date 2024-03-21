@@ -1,32 +1,31 @@
 #!/usr/bin/env python
 
 from __future__ import division
-import sys
-import numpy as np
-import cv2
+
 import random
+import sys
 
-from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel, QDialog, QGroupBox, QFrame, QLayout, QCheckBox, QListWidgetItem, QAbstractItemView, QSpinBox
-from PyQt5.QtWidgets import QHBoxLayout, QVBoxLayout, QWidget, QLineEdit
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject, QPoint, QEvent
-from PyQt5.QtCore import Qt, QSignalMapper, QVariant, QRegExp
-from PyQt5.QtGui import QRegExpValidator, QValidator, QPalette, QColor
-from dialog_main_auto import Ui_Dialog
-
-from helpers import draw_rect, draw_str, clock, combine, intersection_rect
-
-from FilterListOrderMapper import FilterListOrderMapper
-
-from CameraDevice import CameraDevice
-from CameraWidget import CameraWidget
-
-from FrameProcessor import FrameProcessor
-from EdgeDetector import EdgeDetector
-from BlurFilter import BlurFilter
-from BlockNumber import BlockNumber
-from Histogram import HistogramFilter
-from SimpleMotionDetection import SimpleMotionDetection
+import cv2
+import numpy as np
 from ActivityFilter import ActivityFilter
+from BlockNumber import BlockNumber
+from BlurFilter import BlurFilter
+from CameraDevice import CameraDevice
+from dialog_main_auto import Ui_Dialog
+from EdgeDetector import EdgeDetector
+from FilterListOrderMapper import FilterListOrderMapper
+from FrameProcessor import FrameProcessor
+from helpers import clock, combine, draw_rect, draw_str, intersection_rect
+from Histogram import HistogramFilter
+from PyQt5.QtCore import (QEvent, QObject, QPoint, QRegExp, QSignalMapper, Qt,
+                          QVariant, pyqtSignal, pyqtSlot)
+from PyQt5.QtGui import QColor, QPalette, QRegExpValidator, QValidator
+from PyQt5.QtWidgets import (QAbstractItemView, QApplication, QCheckBox,
+                             QDialog, QFrame, QGroupBox, QHBoxLayout, QLabel,
+                             QLayout, QLineEdit, QListWidgetItem, QMainWindow,
+                             QSpinBox, QVBoxLayout, QWidget)
+from SimpleMotionDetection import SimpleMotionDetection
+
 
 class KnobTurner( QObject, Ui_Dialog ):
 
@@ -183,7 +182,7 @@ class KnobTurner( QObject, Ui_Dialog ):
                     lb1 = QLabel( "%s:" % item )
                     sp1 = QSpinBox()
                     sp1.setRange( 0, 10000000 ) # TODO: add this as a query to the filter
-                    sp1.setValue( getattr( fltr, FrameProcessor.propStartsWith + item + FrameProcessor.propEndsWithGetter )() )
+                    sp1.setValue( int( getattr( fltr, FrameProcessor.propStartsWith + item + FrameProcessor.propEndsWithGetter )() ) )
                     vb.addWidget( lb1 )
                     vb.addWidget( sp1 )
 
@@ -281,7 +280,7 @@ class KnobTurner( QObject, Ui_Dialog ):
     def showWindows( self ):
         self.videoLive.show()
         self.videoFiltered.show()
-        print( "Live video size: {}", self.videoLive.sizeHint() )
+        print( "Live video size: {}".format( self.videoLive.sizeHint() ) )
 
     @pyqtSlot( np.ndarray )
     def processPreviewFrame(self, frame ):

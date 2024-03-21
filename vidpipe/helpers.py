@@ -2,6 +2,7 @@
 
 import cv2
 
+
 # expects rect( x1, y1, w, h )
 def combine( rects, thresh = 1 ):
 

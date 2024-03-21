@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import numpy as np
+from PyQt5.QtCore import QObject, pyqtSignal, pyqtSlot
 
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QObject
 
 class FrameProcessor( QObject ):
     propStartsWith = "prop_"

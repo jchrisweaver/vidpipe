@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 
-import numpy as np
 import cv2
+import numpy as np
+
+'''
+Capture live video and save it to a file
+'''
 
 cap = cv2.VideoCapture(0)
 

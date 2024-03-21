@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
 from __future__ import division
+
 import cv2
 import numpy as np
-
 from FrameProcessor import FrameProcessor
-from helpers import draw_rect, combine
+from helpers import combine, draw_rect
 
 '''
 Filter to detect motion.  The 'simple' means it's a very simple imlplemenation:
-Just rack the difference between this frame and the previous frame and if it's
+Just track the difference between this frame and the previous frame and if it's
 above a threashold, mark it as 'activity'
 
 '''

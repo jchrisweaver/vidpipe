@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
 import cv2
-
-from PyQt5 import QtCore
 import numpy as np
+from PyQt5 import QtCore
+
 
 class CameraDevice( QtCore.QObject ):
 
@@ -11,18 +11,19 @@ class CameraDevice( QtCore.QObject ):
 
     newFrame = QtCore.pyqtSignal( np.ndarray )
 
-    def __init__(self, fl = None, cameraId=0, mirrored=False, parent=None):
+    # NOTE: The camera ID is defaulting here to 1
+    def __init__(self, filename = None, cameraId=0, mirrored=True, parent=None):
         super(CameraDevice, self).__init__(parent)
 
         self.mirrored = mirrored
 
-        self._cameraDevice  = cv2.VideoCapture( fl if fl else cameraId )
+        self._cameraDevice  = cv2.VideoCapture( filename if filename else cameraId )
 
         self._timer = QtCore.QTimer( self )
         self._timer.timeout.connect( self._queryFrame )
-        self._timer.setInterval( 1000 / self.fps )
+        self._timer.setInterval( int( 1000 / self.fps ) )
 
-        if fl:
+        if filename:
             self._maxFrameCount = self._cameraDevice.get( cv2.CAP_PROP_FRAME_COUNT );
         self._frameCount = 0
 
@@ -30,13 +31,13 @@ class CameraDevice( QtCore.QObject ):
         self._maxFrameCount = -1
 
     # from: https://stackoverflow.com/questions/9710520/opencv-createimage-function-isnt-working
-    def _createBlankImage( w, h, rgb_colors = ( 0, 0, 0 ) ):
+    def _createBlankImage( self, w, h, rgb_colors = ( 0, 0, 0 ) ):
         """Create new image(numpy array) filled with certain color in RGB"""
         # Create black blank image
-        image = np.zeros((height, width, 3), np.uint8)
+        image = np.zeros((h, w, 3), np.uint8)
 
         # Since OpenCV uses BGR, convert the color first
-        color = tuple(reversed(rgb_color))
+        color = tuple(reversed(rgb_colors))
 
         # Fill image with color
         image[:] = color
@@ -53,7 +54,7 @@ class CameraDevice( QtCore.QObject ):
             if self.mirrored:
                 h, w, channels = frame.shape
                 mirroredFrame = self._createBlankImage( w, h )
-                cv2.flip(frame, mirroredFrame, 1)
+                mirroredFrame = cv2.flip(frame, 1)
                 frame = mirroredFrame
             self.newFrame.emit( frame )
             self._frameCount += 1

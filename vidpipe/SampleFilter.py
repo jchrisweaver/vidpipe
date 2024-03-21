@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 
 import cv2
-
 from FrameProcessor import FrameProcessor
+
 
 class SampleFilter( FrameProcessor ):
 

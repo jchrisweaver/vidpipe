@@ -1,5 +1,5 @@
-import numpy as np
 import cv2
+import numpy as np
 
 img = cv2.imread('/Users/chris/code/bounder/vidpipe/images/VidPipe.png',0)
 cv2.imshow('image',img)

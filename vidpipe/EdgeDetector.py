@@ -1,9 +1,7 @@
 #!/usr/bin/env python
 
 import cv2
-
 from FrameProcessor import FrameProcessor
-
 from helpers import combine
 
 class EdgeDetector( FrameProcessor ):
@@ -46,14 +44,13 @@ class EdgeDetector( FrameProcessor ):
 
         # draw edges on main image
         color = self._color
-        pen_thickness = 1
-        ( _, cnts, _ ) = cv2.findContours( edged_g.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE )
-        cv2.drawContours( frame_in, cnts, -1, color, pen_thickness )
+        pen_thickness = 4
+        ( contours, _ ) = cv2.findContours( edged_g.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE )
+        cv2.drawContours( frame_in, contours, -1, color, pen_thickness )
 
         # draw a bounding box
-        cnts = sorted( cnts, key = cv2.contourArea, reverse = True )#[ : 20 ]
-
-        for r in cnts:
+        contours = sorted( contours, key = cv2.contourArea, reverse = True )#[ : 20 ]
+        for r in contours:
             rect = cv2.boundingRect( r )    # rect is x, y, w, h
             self._activeRects.append( rect )
 

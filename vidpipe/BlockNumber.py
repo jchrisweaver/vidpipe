@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 
 from __future__ import division
+
 import cv2
 import numpy as np
-
 from FrameProcessor import FrameProcessor
-from helpers import draw_str, draw_rect
+from helpers import draw_rect, draw_str
+
 
 class BlockNumber( FrameProcessor ):
 

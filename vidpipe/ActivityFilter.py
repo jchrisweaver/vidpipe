@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 
 from __future__ import division
-import cv2
-import random
-import numpy as np
 
+import random
+
+import cv2
+import numpy as np
 from FrameProcessor import FrameProcessor
 from helpers import draw_rect, draw_str
 

@@ -1,17 +1,16 @@
 #!/usr/bin/env python
 
 from __future__ import division
-import cv2
-import numpy as np
 
-import math     # for sin, remove after testing
-
-from helpers import draw_str
-
-from FrameProcessor import FrameProcessor
-
+import math  # for sin, remove after testing
 # remove later
 import random
+
+import cv2
+import numpy as np
+from FrameProcessor import FrameProcessor
+from helpers import draw_str
+
 
 class HistogramFilter( FrameProcessor ):
     _color = ( 80, 180, 80 )
@@ -38,7 +37,7 @@ class HistogramFilter( FrameProcessor ):
     _maxScale = 1
     _scale = 100000
 
-    _enableDumpFile = False    
+    _enableDumpFile = False
     _fileDataDumpName = "histogram.txt"
     _fileDataDump = None
 
@@ -137,7 +136,7 @@ class HistogramFilter( FrameProcessor ):
                     if self._timeSpan2Mask[ y ][ x ] == True:
                         cv2.circle( vis, ( self._xjump - 6, 4 ), 3, ( 0, 25, 255 ), -1 )
 
-                # running calculation for Sigma Delta 
+                # running calculation for Sigma Delta
                 self._SigmaDeltaAccumulator[ y ][ x ] += frame2frame_difference
 
                 # at time trigger Delta Sigma Delta calcuation

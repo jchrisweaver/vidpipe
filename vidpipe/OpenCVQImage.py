@@ -2,8 +2,9 @@
 
 import cv2
 import numpy as np
-
 from PyQt5 import QtGui
+
+# Converts a NumPy array to QImage
 
 class OpenCVQImage( QtGui.QImage ):
 
