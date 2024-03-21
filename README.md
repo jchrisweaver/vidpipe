@@ -55,9 +55,15 @@ eyJoaXN0b3J5IjpbLTIwNzk2Njg5NTYsODAwMTU1NDEsMTE0OT
 I0NzIwLDE0NjkxMzk5NzJdfQ==
 -->
 
-NOTE:  If the GUI dialog is edited, the file dialog_main_auto.py needs to be edited:
-> from CameraWidget import CameraWidget
+NOTE:  If the GUI dialog is edited, the file dialog_main_auto.py needs to be edited:ds
+'''
+from CameraWidget import CameraWidget
+
 ...
-> self.videoLive = CameraWidget(self.frame)
+
+self.videoLive = CameraWidget(self.frame)
+
 ...
-> self.videoFiltered = CameraWidget(self.frame_2)
+
+self.videoFiltered = CameraWidget(self.frame_2)
+'''
