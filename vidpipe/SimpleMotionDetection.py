@@ -16,11 +16,9 @@ above a threashold, mark it as 'activity'
 
 class SimpleMotionDetection( FrameProcessor ):
 
-    _color = ( 200, 80, 80 )
-
     # 10 x 10 grid
-    _X = 10    # 64 pixels
-    _Y = 10    # 48 pixels
+    _X = 10    # 64 pixels for a 640x480 frame
+    _Y = 10    # 48 pixels for a 640x480 frame
     _threshold = 0.05   # 5% value change - LOWER is more sensitive
     # the percence difference between this frame and the prev frame that counts as motion
 
@@ -81,9 +79,12 @@ class SimpleMotionDetection( FrameProcessor ):
         self._activeRects = []
         self._boundingBox = []
 
+        # get the size of the frame
+        h, w, _ = frame_in.shape
+
         # divide the frame into X x Y grid
-        yjump = int( 480 / self._Y )
-        xjump = int( 640 / self._X )
+        yjump = int( h / self._Y )
+        xjump = int( w / self._X )
 
         # brute force a background
         #draw_rect( frame_in, ( 0, 0 ), ( 640, 480 ), ( 0, 0, 0 ) )

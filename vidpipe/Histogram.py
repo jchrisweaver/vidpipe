@@ -30,9 +30,7 @@ class HistogramFilter( FrameProcessor ):
     _last = 0   # last value stored
     _count = 0  # how many values in the histagram so far
 
-    ringlen = 100
-    _xjump = int( 640 / _X )
-    _yjump = int( 480 / _Y )
+    ringlen = 500
     _graph_ringbuf = np.zeros( ringlen, np.uint8 )
     _maxScale = 1
     _scale = 100000
@@ -96,9 +94,14 @@ class HistogramFilter( FrameProcessor ):
 
         self._frameCount += 1
 
+        # get the size of the frame
+        h, w, _ = frame_in.shape
+
         # divide the frame into X x Y grid
-        yjump = 480 / self._Y
-        xjump = 640 / self._X
+        yjump = int( h / self._Y )
+        xjump = int( w / self._X )
+        yjump = yjump
+        xjump = xjump
 
         # for spiting out data
         outBuffer = ""
@@ -126,15 +129,15 @@ class HistogramFilter( FrameProcessor ):
                     vis = frame_in[ int( y * yjump ) : int( ( y + 1 ) * yjump ), int( x * xjump ) : int( ( x + 1 ) * xjump ) ]
 
                     # show midway mark for refrence
-                    cv2.line( vis, ( 0, self._yjump - int( self._yjump / 2 ) ), ( self._xjump - 1, self._yjump - int( self._yjump / 2 ) ), ( 128, 128, 128 ), 1 )
+                    cv2.line( vis, ( 0, yjump - int( yjump / 2 ) ), ( xjump - 1, yjump - int( yjump / 2 ) ), ( 128, 128, 128 ), 1 )
 
                     # plot the values and the moving average
-                    for xx in range( 1, self._xjump ):
-                        cv2.line( vis, ( xx - 1, self._yjump - int( self._graph_ringbuf[ xx - 1 ] ) ), ( xx, self._yjump - int( self._graph_ringbuf[ xx ] ) ), ( 255, 255, 0 ), 1 )
-                        cv2.line( vis, ( xx - 1, self._yjump - int( self._graph_ringbuf_MovingAverage[ xx - 1 ] ) ), ( xx, self._yjump - int( self._graph_ringbuf_MovingAverage[ xx ] ) ), ( 0, 25, 255 ), 2 )
+                    for xx in range( 1, xjump ):
+                        cv2.line( vis, ( xx - 1, yjump - int( self._graph_ringbuf[ xx - 1 ] ) ), ( xx, yjump - int( self._graph_ringbuf[ xx ] ) ), ( 255, 255, 0 ), 1 )
+                        cv2.line( vis, ( xx - 1, yjump - int( self._graph_ringbuf_MovingAverage[ xx - 1 ] ) ), ( xx, yjump - int( self._graph_ringbuf_MovingAverage[ xx ] ) ), ( 0, 25, 255 ), 2 )
 
                     if self._timeSpan2Mask[ y ][ x ] == True:
-                        cv2.circle( vis, ( self._xjump - 6, 4 ), 3, ( 0, 25, 255 ), -1 )
+                        cv2.circle( vis, ( xjump - 6, 4 ), 3, ( 0, 25, 255 ), -1 )
 
                 # running calculation for Sigma Delta
                 self._SigmaDeltaAccumulator[ y ][ x ] += frame2frame_difference
@@ -175,24 +178,24 @@ class HistogramFilter( FrameProcessor ):
                         gg = math.sin( math.radians( self._frameCount % 360 ) ) * 10000 + 10000 # random numbers -10000 and +10000
                         self._graph_ringbuf = np.roll( self._graph_ringbuf, 1 )
 
-                        self._graph_ringbuf[ 0 ] = int( self._yjump * gg / self._scale )
+                        self._graph_ringbuf[ 0 ] = int( yjump * gg / self._scale )
 
                         self._movingAverageSlidingWindow = np.roll( self._movingAverageSlidingWindow, 1 )
                         self._movingAverageSlidingWindow[ 0 ] = gg
                         self._graph_ringbuf_MovingAverage = np.roll( self._graph_ringbuf_MovingAverage, 1 )
-                        self._graph_ringbuf_MovingAverage[ 0 ] = self.movingAverage( ( self._yjump * self._movingAverageSlidingWindow / self._scale ), self._slidingWindow )
+                        self._graph_ringbuf_MovingAverage[ 0 ] = self.movingAverage( ( yjump * self._movingAverageSlidingWindow / self._scale ), self._slidingWindow )
                         ########### testing
                         '''
 
                         self._graph_ringbuf = np.roll( self._graph_ringbuf, 1 )
-                        self._graph_ringbuf[ 0 ] = int( self._yjump * delta_sigma_delta / self._scale )
+                        self._graph_ringbuf[ 0 ] = int( yjump * delta_sigma_delta / self._scale )
 
                         #self._movingAverageSlidingWindow = np.roll( self._movingAverageSlidingWindow, 1 )
                         #self._movingAverageSlidingWindow[ 0 ] = gg
 
                         self._graph_ringbuf_MovingAverage = np.roll( self._graph_ringbuf_MovingAverage, 1 )
-                        #self._graph_ringbuf_MovingAverage[ 0 ] = self.movingAverage( ( self._yjump * self._movingAverageSlidingWindow / scale ), self._slidingWindow )
-                        self._graph_ringbuf_MovingAverage[ 0 ] = self._yjump * self._cumulativeAverage[ y ][ x ] / self._scale
+                        #self._graph_ringbuf_MovingAverage[ 0 ] = self.movingAverage( ( yjump * self._movingAverageSlidingWindow / scale ), self._slidingWindow )
+                        self._graph_ringbuf_MovingAverage[ 0 ] = yjump * self._cumulativeAverage[ y ][ x ] / self._scale
 
                         #print( "MovAvg: %d" % self._graph_ringbuf_MovingAverage[ 0 ] )
 

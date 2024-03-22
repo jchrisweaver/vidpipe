@@ -49,6 +49,8 @@ class EdgeDetector( FrameProcessor ):
         cv2.drawContours( frame_in, contours, -1, color, pen_thickness )
 
         # draw a bounding box
+        # NOTE: skip the bounding box since it's not very useful
+        '''
         contours = sorted( contours, key = cv2.contourArea, reverse = True )#[ : 20 ]
         for r in contours:
             rect = cv2.boundingRect( r )    # rect is x, y, w, h
@@ -57,7 +59,7 @@ class EdgeDetector( FrameProcessor ):
             cv2.rectangle( frame_in, ( rect[ 0 ], rect[ 1 ] ), ( rect[ 0 ] + rect[ 2 ], rect[ 1 ] + rect[ 3 ] ), ( 0, 255, 255 ), 1 )
 
         self._boundingBox = combine( self._activeRects )
-
+        '''
         return frame_in
 
 

@@ -19,14 +19,17 @@ class BlockNumber( FrameProcessor ):
         super( BlockNumber, self ).__init__()
         self._name = "Block Number"
 
-        # divide the frame into X x Y grid
-        self._yjump = 480 / self._Y
-        self._xjump = 640 / self._X
-
     def processFrame( self, frame_in ):
         # frame_in is BGR
         # frame_in.shape = ( 480, 640, 3 )
         self._frameCount += 1
+
+        # get the size of the frame
+        h, w, _ = frame_in.shape
+
+        # divide the frame into X x Y grid
+        self._yjump = h / self._Y
+        self._xjump = w / self._X
 
         # brute force a background
         #draw_rect( frame_in, 0, 0, 640, 480, ( 0, 0, 0 ) )

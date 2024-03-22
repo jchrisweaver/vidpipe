@@ -22,7 +22,12 @@ class BackgroundRemove( FrameProcessor ):
         self._speed = 0.01
         self._avg = None
 
-        self._fgbg = cv2.BackgroundSubtractorMOG()
+        # initializing subtractor
+        self._fgbg = cv2.createBackgroundSubtractorMOG2(
+            history = 500,
+            varThreshold = 16,
+            detectShadows = False
+        )
 
     def prop_AdaptSpeed_set( self, val ):
         self._speed = float( val / 100 )
@@ -38,12 +43,15 @@ class BackgroundRemove( FrameProcessor ):
     #    pass
 
     def processFrame( self, frame_in ):
+
+        '''
         # version 1 - moving average
         if self._avg == None:
             self._avg = np.float32( frame_in )
         cv2.accumulateWeighted( frame_in, self._avg, self._speed )
         background = cv2.convertScaleAbs( self._avg )
         active_area = cv2.absdiff( frame_in, background )
+        '''
 
         #version 2 - MOG - Gausian Mixture-based Background/Foreground Segmentation Algorithm
         fgmask = self._fgbg.apply( frame_in ,learningRate = 0.01 )

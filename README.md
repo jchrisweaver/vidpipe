@@ -9,7 +9,7 @@ see the immediate effect.
 
 ## To run
 
-python main.py
+python3 main.py
 
 ## Overview
 
@@ -39,6 +39,13 @@ Each filter takes a single action.  For example, the Blur Filter takes an incomi
 *TODO: Add steps here!*
 
 The GUI is designed with QT for simplicity, which must be installed manually (https://www.qt.io/download)
+
+## Future Filters
+
+* Color filter - pick out a specific color in the video
+* YOLO - implement the YOLO algorithm
+* Object track - track objects on linear path
+
 
 ## Why I Wrote This
 

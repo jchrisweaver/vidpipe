@@ -13,7 +13,9 @@ class FrameProcessor( QObject ):
     _activeRects = []
     _boundingBox = []
 
-    _color = ( 255, 255, 255 )
+    # color of the filter and outlines
+    # None will default to standard gray
+    _color = None
 
     def __init__ ( self ):
         super( FrameProcessor, self ).__init__()

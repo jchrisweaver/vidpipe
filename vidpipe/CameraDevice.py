@@ -11,7 +11,6 @@ class CameraDevice( QtCore.QObject ):
 
     newFrame = QtCore.pyqtSignal( np.ndarray )
 
-    # NOTE: The camera ID is defaulting here to 1
     def __init__(self, filename = None, cameraId=0, mirrored=True, parent=None):
         super(CameraDevice, self).__init__(parent)
 

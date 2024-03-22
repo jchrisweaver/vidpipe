@@ -56,11 +56,11 @@ class ActivityFilter( FrameProcessor ):
 
         # frame that's processed but is hijacked to show a histogram instead of video
         # useful for debugging values and buffers
-        self._watchFrame_enabled = False
+        self._watchFrame_enabled = True
         self._watchFrame = ( 0, 8 ) # Set the watch frame at cel x=8, y=0   NOTE: Order is Y, X
 
-        self._graph_ringbuf_MovingAverage = np.zeros( 100, np.float32 )
-        self._graph_ringbuf = np.zeros( 100, np.uint8 )
+        self._graph_ringbuf_MovingAverage = np.zeros( 200, np.float32 )
+        self._graph_ringbuf = np.zeros( 200, np.uint8 )
         self._maxhistAccum = 1  # use 1 to avoid divide by zero later
 
     def prop_ChangeThresh_set( self, thresh ):
@@ -75,8 +75,8 @@ class ActivityFilter( FrameProcessor ):
     def prop_Watch_set( self, val ):
         # TODO: error check
         self._watchFrame = tuple( val )[ :: -1 ]
-        self._graph_ringbuf_MovingAverage = np.zeros( 100, np.float32 )
-        self._graph_ringbuf = np.zeros( 100, np.uint8 )
+        self._graph_ringbuf_MovingAverage = np.zeros( 200, np.float32 )
+        self._graph_ringbuf = np.zeros( 200, np.uint8 )
         self._maxhistAccum = 1
 
     def prop_Watch_get( self):
@@ -90,9 +90,12 @@ class ActivityFilter( FrameProcessor ):
         # frame_in.shape = ( 480, 640, 3 )
         self._frameCount += 1
 
+        # get the size of the frame
+        h, w, _ = frame_in.shape
+
         # divide the frame into X x Y grid
-        yjump = int( 480 / self._Y )
-        xjump = int( 640 / self._X )
+        yjump = int( w / self._Y )
+        xjump = int( h / self._X )
 
         # brute force a background
         #draw_rect( frame_in, 0, 0, 640, 480, ( 0, 0, 0 ) )

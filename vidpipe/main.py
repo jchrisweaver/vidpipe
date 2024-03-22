@@ -8,6 +8,7 @@ import sys
 import cv2
 import numpy as np
 from ActivityFilter import ActivityFilter
+from BackgroundRemove import BackgroundRemove
 from BlockNumber import BlockNumber
 from BlurFilter import BlurFilter
 from CameraDevice import CameraDevice
@@ -34,6 +35,7 @@ class KnobTurner( QObject, Ui_Dialog ):
     _alpha = 0.01                   # how fast to update the screen refresh frame rate display variable
     _showHist = False
     _histogramWindowName = "Color Histogram"
+    _cameraId = 1                   # the camera ID of the system, typically 0 or 1
 
     class Mapper( QObject ):
 
@@ -60,13 +62,15 @@ class KnobTurner( QObject, Ui_Dialog ):
         Ui_Dialog.__init__( self )
         QObject.__init__( self )
 
+        # TODO: read these from a config file or from a subdirectory
         self._filters = [
             BlurFilter(),
             SimpleMotionDetection(),
             ActivityFilter(),
             HistogramFilter(),
             BlockNumber(),
-            EdgeDetector()
+            EdgeDetector(),
+            BackgroundRemove()
             ]
 
     @pyqtSlot( )
@@ -160,13 +164,13 @@ class KnobTurner( QObject, Ui_Dialog ):
             # Row ------
             fm = QFrame()
             vb = QVBoxLayout( fm )
-
-            vb.setSizeConstraint( QLayout.SetFixedSize )
+            vb.setSizeConstraint( QLayout.SetDefaultConstraint )
 
             # add the enabled checkbox first always
             cb2 = QCheckBox( fltr.name )
             cb2.setCheckState( getattr( fltr, FrameProcessor.propStartsWith + "Enabled" + FrameProcessor.propEndsWithGetter )() )
-            cb2.setStyleSheet( 'background-color:#%02x%02x%02x' % ( fltr.color()[ :: -1 ] ) )
+            if fltr.color():
+                cb2.setStyleSheet( 'background-color:#%02x%02x%02x' % ( fltr.color()[ :: -1 ] ) )
             vb.addWidget( cb2 )
             # watch for values changing
             cb2.stateChanged.connect( self._optionMapper.map )
@@ -228,7 +232,7 @@ class KnobTurner( QObject, Ui_Dialog ):
             # end Row 2 -----
 
             vbl.addWidget( fm )
-            vbl.setSizeConstraint( QLayout.SetFixedSize )
+            vbl.setSizeConstraint( QLayout.SetDefaultConstraint )   # default value, being explicit
 
             lwi = QListWidgetItem()
             lwi.setSizeHint( vbl.sizeHint() )
@@ -250,7 +254,7 @@ class KnobTurner( QObject, Ui_Dialog ):
         print( "Starting camera" )
         #vid = "drop.avi"    # use video instead of camera
         vid = None
-        self._cameraDevice = CameraDevice( vid )
+        self._cameraDevice = CameraDevice( vid, self._cameraId )
 
         self.videoLive.setCamera( self._cameraDevice )
         self.videoLive.newFrame.connect( self.processPreviewFrame )
@@ -342,7 +346,8 @@ class KnobTurner( QObject, Ui_Dialog ):
         if self._frameRate_RunningAvg == -1:
             self._frameRate_RunningAvg = delta_t
         self._frameRate_RunningAvg = ( self._alpha * delta_t ) + ( 1.0 - self._alpha ) * self._frameRate_RunningAvg
-        draw_str( frame, 20, 20, 'time: %.1f ms' % ( self._frameRate_RunningAvg * 1000 ) )
+        # TODO: adjust the location of the text based off the size of the font
+        draw_str( frame, 20, 44, 'time: %.1f ms' % ( self._frameRate_RunningAvg * 1000 ) )
 
         # last guy puts the frame up
         self.videoFiltered.setNewFrame( frame )
