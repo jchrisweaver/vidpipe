@@ -46,7 +46,6 @@ The GUI is designed with QT for simplicity, which must be installed manually (ht
 * YOLO - implement the YOLO algorithm
 * Object track - track objects on linear path
 
-
 ## Why I Wrote This
 
 I took the [PyImageSearch Gurus](https://www.pyimagesearch.com/pyimagesearch-gurus/) course to learn more about computer vision.  Many of
@@ -57,20 +56,9 @@ I wanted to better understand how each discrete step affected the image data and
 If you use and enjoy this tool, please let me know @jchrisweaver on twitter.
 
 And by all means, please submit PRs if you'd like to add features, fix bugs, etc.
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwNzk2Njg5NTYsODAwMTU1NDEsMTE0OT
-I0NzIwLDE0NjkxMzk5NzJdfQ==
--->
 
-NOTE:  If the GUI dialog is edited, the file dialog_main_auto.py needs to be edited:ds
-```
-from CameraWidget import CameraWidget
+## NOTE:  Selecting the camera for the video feed
 
-...
+The camera feed is selected in the KnobTurner class in the main.py file as _cameraId.  For OS X, it's unclear how the camera ID is determined.  I've found it to be 0 on my Mac, but it may not be the same on other systems.
 
-self.videoLive = CameraWidget(self.frame)
-
-...
-
-self.videoFiltered = CameraWidget(self.frame_2)
-```
+Further, OS X has implemented an enhanced permissions model that requires the user to give the app permission to use the camera.  I don't have more information at this point on how to work with that model, other than to give the app permission when requested.

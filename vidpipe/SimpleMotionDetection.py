@@ -8,7 +8,7 @@ from FrameProcessor import FrameProcessor
 from helpers import combine, draw_rect
 
 '''
-Filter to detect motion.  The 'simple' means it's a very simple imlplemenation:
+Filter to detect motion.  The 'simple' means it's a very simple implemenation:
 Just track the difference between this frame and the previous frame and if it's
 above a threashold, mark it as 'activity'
 
